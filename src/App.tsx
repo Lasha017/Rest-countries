@@ -4,6 +4,7 @@ import Header from './components /header/Header'
 
 function App() {
   
+  document.title = "Rest-countries";
 
   return (
     <>

@@ -1,8 +1,12 @@
-import React from 'react'
+import Image from './../../assets/search-1.svg'
 
 const Search = () => {
   return (
-    <div>search</div>
+    <>
+      <div>
+        <img src={Image} alt="Search btn" />
+        <input type="search" placeholder="Search for a country…" /></div>
+    </>
   )
 }
 

@@ -1,21 +1,15 @@
 import useFetch from "../../hooks/useFetch";
 import Filter from "../filter/Filter";
+import Loader from "../loader/Loader";
 import Search from "../search /Search";
+import { Country } from "./../../types/Types";
 
-interface Country {
-  name: {
-    common: string;
-  };
-  flags: {
-    svg: string;
-  };
-  population: number;
-  region: string;
-  capital: string;
-}
+
 
 const Countries = () => {
-  const { data } = useFetch("https://restcountries.com/v3.1/all");
+  const { data, isLoading ,isError} = useFetch("https://restcountries.com/v3.1/all");
+  if (isLoading) return <Loader title="Please wait..." />
+  if(isError) return <h1>Something went wrong!</h1>
   return (
     <>
       <div className="bg-[#FAFAFA]">
