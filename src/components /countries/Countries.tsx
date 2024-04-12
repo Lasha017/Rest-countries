@@ -3,7 +3,8 @@ import useFetch from "../../hooks/useFetch";
 import Filter from "../filter/Filter";
 import Loader from "../loader/Loader";
 import Search from "../search /Search";
-import { Country } from "./../../types/Types";
+import { CountryTypes } from "./../../types/Types";
+import { Link } from "react-router-dom";
 
 const Countries = () => {
   const { data, isLoading, isError } = useFetch(
@@ -26,14 +27,15 @@ const Countries = () => {
           </div>
           <div className="grid grid-cols-4 pt-20  g-[50px] md:max-xl:grid-cols-2  max-[768px]:grid-cols-1 justify-items-center">
             {(data || [])
-              .filter((item: Country) => {
+              .filter((item: CountryTypes) => {
                 return (
                   search.toLowerCase() === "" ||
                   item.name.common.toLowerCase().includes(search.toLowerCase())
                 );
               })
-              .map((country: Country, index: number) => (
-                <div
+              .map((country: CountryTypes, index: number) => (
+                <Link to={`/${country.name.common}`}>
+                   <div
                   key={index}
                   className="bg-white w-[250px] rounded-lg cursor-pointer m-8"
                 >
@@ -60,6 +62,7 @@ const Countries = () => {
                     </div>
                   </div>
                 </div>
+               </Link>
               ))}
           </div>
         </div>
