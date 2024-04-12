@@ -19,13 +19,13 @@ const Countries = () => {
 
   return (
     <>
-      <div className="bg-[#FAFAFA]">
-        <div className="flex flex-col p-16">
-          <div className="flex justify-between">
+      <div className="bg-[#FAFAFA] mt-[10px]">
+        <div className="flex flex-col px-16 py-10">
+          <div className="flex justify-between items-center">
             <Search setSearch={setSearch}/>
             <Filter />
           </div>
-          <div className="grid grid-cols-4 pt-20  g-[50px] md:max-xl:grid-cols-2  max-[768px]:grid-cols-1 justify-items-center">
+          <div className="grid grid-cols-4  g-[50px] md:max-xl:grid-cols-2  max-[768px]:grid-cols-1 justify-items-center">
             {(data || [])
               .filter((item: CountryTypes) => {
                 return (
@@ -50,7 +50,7 @@ const Countries = () => {
                     </h1>
                     <div className="flex">
                       <h3 className="pr-2 font-semibold">Population:</h3>
-                      {country.population}
+                      {country.population.toLocaleString()}
                     </div>
                     <div className="flex">
                       <h3 className="pr-2 font-semibold">Region:</h3>

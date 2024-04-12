@@ -2,11 +2,15 @@ import useFetch from "../../hooks/useFetch";
 import Header from "../header/Header";
 import { Link, useParams } from "react-router-dom";
 import { CountryTypes } from "../../types/Types";
+import Loader from "../loader/Loader";
 
 const Country = () => {
   const { name } = useParams();
-  const { data } = useFetch(`https://restcountries.com/v3.1/name/${name}`);
-  console.log(data);
+  const { data, isLoading } = useFetch(
+    `https://restcountries.com/v3.1/name/${name}`
+  );
+
+  if (isLoading) return <Loader title="Please wait..." />;
 
   return (
     <>
@@ -20,7 +24,10 @@ const Country = () => {
             >
               ← Back
             </Link>
-            <div key={country.population} className="flex gap-[200px] pt-20">
+            <div
+              key={country.population}
+              className="flex gap-[200px] pt-20 max-[768px]:flex-col max-[768px]:gap-0"
+            >
               <div>
                 <img
                   src={country.flags.svg}
@@ -33,41 +40,63 @@ const Country = () => {
                     {country.name.common}
                   </h1>
                 </div>
-                <div className="flex gap-10 pt-10">
-                  <div>
-                    <p>
-                      <span className="font-semibold">Native Name:</span>{" "}
-                      {country.name.nativeName?.eng?.common ||
-                        "Native name not available"}
-                    </p>
-                    <p>
-                      <span className="font-semibold">Population:</span>{" "}
-                      {country.population}
-                    </p>
-                    <p>
-                      <span className="font-semibold">Region:</span>{" "}
-                      {country.region}
-                    </p>
-                    <p>
-                      <span className="font-semibold">Sub region:</span>{" "}
-                      {country.subregion}
-                    </p>
-                    <p>
-                      <span className="font-semibold">Capital:</span>{" "}
-                      {country.capital}
-                    </p>
+                <div className="gap-[50px] pt-10 flex flex-col">
+                  <div className="flex">
+                    {" "}
+                    <div className="mr-16">
+                      <p>
+                        <span className="font-semibold">Native Name:</span>{" "}
+                        {country.name.nativeName?.eng?.common ||
+                          "Not available"}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Population:</span>{" "}
+                        {country.population.toLocaleString()}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Region:</span>{" "}
+                        {country.region}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Sub region:</span>{" "}
+                        {country.subregion}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Capital:</span>{" "}
+                        {country.capital}
+                      </p>
+                    </div>
+                    <div>
+                      <p>
+                        <span className="font-semibold">Top Level Domain:</span>{" "}
+                        {country.tld}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Currencies:</span>
+                      </p>
+                      <p>
+                        <span className="font-semibold">Languages:</span>{" "}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p>
-                      <span className="font-semibold">Top Level Domain:</span> {country.tld}
-                    </p>
-                    <p>
-                      <span className="font-semibold">Currencies:</span>
-                    </p>
-                    <p>
-                      <span className="font-semibold">Languages:</span>{" "}
-                    </p>
-                  </div>
+                  {country.borders && (
+                    <ul>
+                      <div className="flex max-[1024px]:flex-col max-[1024px]:w-[100px]">
+                        <h5 className="pr-2 font-semibold flex items-center">
+                          Border Countries:
+                        </h5>
+                        {country.borders.map((border:any, index:any) => (
+                          <li
+                            key={index}
+                            className="mr-2 px-5 py-1 cursor-pointer"
+                            id="li"
+                          >
+                            {border}
+                          </li>
+                        ))}
+                      </div>
+                    </ul>
+                  )}
                 </div>
               </div>
             </div>
