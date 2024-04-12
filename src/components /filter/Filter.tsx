@@ -1,7 +1,7 @@
 
 const Filter = () => {
   return (
-    <div>filter</div>
+    <div>Filter by Region</div>
   )
 }
 
