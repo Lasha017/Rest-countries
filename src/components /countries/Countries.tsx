@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
-import Filter from "../filter/Filter";
 import Loader from "../loader/Loader";
 import Search from "../search /Search";
 import { CountryTypes } from "./../../types/Types";
@@ -23,7 +22,7 @@ const Countries = () => {
         <div className="flex flex-col px-16 py-10">
           <div className="flex justify-between items-center">
             <Search setSearch={setSearch}/>
-            <Filter />
+            {/* <Filter /> */}
           </div>
           <div className="grid grid-cols-4  g-[50px] md:max-xl:grid-cols-2  max-[768px]:grid-cols-1 justify-items-center">
             {(data || [])
